@@ -1,0 +1,12 @@
+version: '3'
+services:
+  waha:
+    image: devlikeapro/waha
+    container_name: "waha"
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
