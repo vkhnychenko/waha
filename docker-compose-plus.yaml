@@ -1,8 +1,8 @@
 ---
 services:
   waha:
-    image: devlikeapro/waha
-    container_name: "waha"
+    image: devlikeapro/waha-plus
+    container_name: "waha-plus"
     env_file:
       - .env
     ports:
