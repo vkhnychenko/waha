@@ -1,7 +1,7 @@
 ---
 services:
   waha:
-    image: devlikeapro/waha
+    image: devlikeapro/waha-plus
     container_name: "waha"
     env_file:
       - .env
