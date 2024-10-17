@@ -6,7 +6,7 @@ services:
     env_file:
       - .env
     ports:
-      - '127.0.0.1:3000:3000/tcp'
+      - '3000:3000/tcp'
     volumes:
       # Store sessions in the .sessions folder (comment it if you're using MongoDB)
       - './.sessions:/app/.sessions'
