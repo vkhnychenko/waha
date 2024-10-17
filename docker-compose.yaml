@@ -6,7 +6,12 @@ services:
     env_file:
       - .env
     ports:
-      - "3000:3000"
-    stdin_open: true
-    tty: true
+      - '127.0.0.1:3000:3000/tcp'
+    volumes:
+      # Store sessions in the .sessions folder (comment it if you're using MongoDB)
+      - './.sessions:/app/.sessions'
+
+      # Save media files
+      # https://waha.devlike.pro/docs/how-to/storages/#save-media-files-between-the-container-restarts
+      - './.media:/app/.media'
     restart: unless-stopped
