@@ -6,7 +6,7 @@ services:
     env_file:
       - .env
     ports:
-      - '3000:3000/tcp'
+      - '127.0.0.1:3000:3000/tcp'
     volumes:
       # Store sessions in the .sessions folder (comment it if you're using MongoDB)
       - './.sessions:/app/.sessions'
@@ -15,3 +15,15 @@ services:
       # https://waha.devlike.pro/docs/how-to/storages/#save-media-files-between-the-container-restarts
       - './.media:/app/.media'
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.waha.entrypoints=http"
+      - "traefik.http.routers.waha.rule=Host(`waha.topmakers.space`)"
+      - "traefik.http.middlewares.waha-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.waha.middlewares=waha-https-redirect"
+      - "traefik.http.routers.waha-secure.entrypoints=https"
+      - "traefik.http.routers.waha-secure.rule=Host(`waha.topmakers.space`)"
+      - "traefik.http.routers.waha-secure.tls=true"
+      - "traefik.http.routers.waha-secure.service=waha"
+      - "traefik.http.services.waha.loadbalancer.server.port=3000"
+      - "traefik.docker.network=proxy"
